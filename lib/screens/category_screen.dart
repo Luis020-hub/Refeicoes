@@ -5,6 +5,8 @@ import 'package:refeicoes/data/dummy_data.dart';
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
 
+  // Remover Scaffold
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
