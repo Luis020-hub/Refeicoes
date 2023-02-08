@@ -14,7 +14,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
   final List<Map<String, Object>> _screens = [
     {'title': 'List of Categories', 'screen': const CategoriesScreen()},
-    {'title': 'My Favorite', 'screen': const FavoriteScreen()},
+    {'title': 'My Favorites', 'screen': const FavoriteScreen()},
   ];
 
   _selectScreen(int index) {
@@ -28,7 +28,7 @@ class _TabsScreenState extends State<TabsScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+         title: Text(
           _screens[_selectedScreenIndex]['title'] as String,
         ),
       ),
