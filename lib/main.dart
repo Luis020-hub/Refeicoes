@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Meals',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.teal,
+          primarySwatch: Colors.indigo,
         ).copyWith(
           secondary: Colors.amber,
         ),
