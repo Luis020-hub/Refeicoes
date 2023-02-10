@@ -11,7 +11,7 @@ class SettingsScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text('Settings'),
       ),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
       body: const Center(
         child: Text('Settings!'),
       ),
