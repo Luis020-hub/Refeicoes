@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:refeicoes/models/settings.dart';
 import 'screens/category_screen.dart';
 import 'screens/categories_meals_screen.dart';
 import './utils/app_routes.dart';
@@ -19,6 +20,22 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Meal> _AvaiableMeals = dummyMeals;
+
+  void _filterMeals(Settings settings) {
+    setState(() {
+      _AvaiableMeals = dummyMeals.where((meal) {
+        final filterGluten = settings.isGlutenFree && !meal.isGlutenFree;
+        final filterLactose = settings.isLactoseFree && !meal.isLactoseFree;
+        final filterVegan = settings.isVegan && !meal.isVegan;
+        final filterVegetarian = settings.isVegetarian && !meal.isVegetarian;
+
+        return !filterGluten &&
+            !filterLactose &&
+            !filterVegan &&
+            !filterVegetarian;
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +63,8 @@ class _MyAppState extends State<MyApp> {
         AppRoutes.home: (ctx) => const TabsScreen(),
         AppRoutes.categoriesMeals: (ctx) =>
             CategoriesMealsScreen(_AvaiableMeals),
-        AppRoutes.mealDetail: (ctx) => const MealDetailScreen(),
-        AppRoutes.settings: (ctx) => const SettingsScreen(),
+        AppRoutes.mealDetail: (ctx) => MealDetailScreen(),
+        AppRoutes.settings: (ctx) => SettingsScreen(_filterMeals),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
