@@ -14,11 +14,11 @@ class MealItem extends StatelessWidget {
       arguments: meal,
     )
         .then((result) {
-      if (result == null) {
-        print('No results');
-      } else {
-        print('The meal name is $result');
-      }
+      // if (result == null) {
+      //   print('No results');
+      // } else {
+      //   print('The meal name is $result');
+      // }
     });
   }
 

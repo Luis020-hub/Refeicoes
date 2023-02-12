@@ -20,9 +20,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Meal> _AvaiableMeals = dummyMeals;
+  Settings settings = Settings();
 
   void _filterMeals(Settings settings) {
     setState(() {
+      this.settings = settings;
+
       _AvaiableMeals = dummyMeals.where((meal) {
         final filterGluten = settings.isGlutenFree && !meal.isGlutenFree;
         final filterLactose = settings.isLactoseFree && !meal.isLactoseFree;
@@ -63,8 +66,8 @@ class _MyAppState extends State<MyApp> {
         AppRoutes.home: (ctx) => const TabsScreen(),
         AppRoutes.categoriesMeals: (ctx) =>
             CategoriesMealsScreen(_AvaiableMeals),
-        AppRoutes.mealDetail: (ctx) => MealDetailScreen(),
-        AppRoutes.settings: (ctx) => SettingsScreen(_filterMeals),
+        AppRoutes.mealDetail: (ctx) => const MealDetailScreen(),
+        AppRoutes.settings: (ctx) => SettingsScreen(_filterMeals, settings),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(

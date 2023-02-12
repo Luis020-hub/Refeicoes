@@ -3,8 +3,9 @@ import '../components/main_drawer.dart';
 import '../models/settings.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen(this.onSettingsChanged, {super.key});
+  const SettingsScreen(this.onSettingsChanged, this.settings, {super.key});
 
+  final Settings settings;
   final Function(Settings) onSettingsChanged;
 
   @override
@@ -12,7 +13,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  var settings = Settings();
+  var settings;
+
+  @override
+  void initState() {
+    super.initState();
+    settings = widget.settings;
+  }
 
   Widget _createSwitch(
     String title,
