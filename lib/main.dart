@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:refeicoes/models/settings.dart';
 import 'screens/category_screen.dart';
@@ -19,8 +21,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Meal> _AvaiableMeals = dummyMeals;
   Settings settings = Settings();
+  List<Meal> _AvaiableMeals = dummyMeals;
+  final List<Meal> _favoriteMeals = [];
 
   void _filterMeals(Settings settings) {
     setState(() {
@@ -38,6 +41,18 @@ class _MyAppState extends State<MyApp> {
             !filterVegetarian;
       }).toList();
     });
+  }
+
+  void _toggleFavorite(Meal meal) {
+    setState(() {
+      _favoriteMeals.contains(meal)
+          ? _favoriteMeals.remove(meal)
+          : _favoriteMeals.add(meal);
+    });
+  }
+
+  bool _isFavorite(Meal meal) {
+    return _favoriteMeals.contains(meal);
   }
 
   @override
@@ -61,12 +76,12 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
       ),
-      home: const TabsScreen(),
+      home: TabsScreen(_favoriteMeals),
       routes: {
-        AppRoutes.home: (ctx) => const TabsScreen(),
+        AppRoutes.home: (ctx) => TabsScreen(_favoriteMeals),
         AppRoutes.categoriesMeals: (ctx) =>
             CategoriesMealsScreen(_AvaiableMeals),
-        AppRoutes.mealDetail: (ctx) => const MealDetailScreen(),
+        AppRoutes.mealDetail: (ctx) => MealDetailScreen(_toggleFavorite, _isFavorite),
         AppRoutes.settings: (ctx) => SettingsScreen(_filterMeals, settings),
       },
       onUnknownRoute: (settings) {

@@ -1,12 +1,25 @@
 import 'package:flutter/cupertino.dart';
+import 'package:refeicoes/models/meal.dart';
+import '../components/meal_item.dart';
 
 class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({super.key});
+  const FavoriteScreen(this.favoriteMeals, {super.key});
+
+  final List<Meal> favoriteMeals;
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('My favorite foods!'),
-    );
+    if (favoriteMeals.isEmpty) {
+      return const Center(
+        child: Text('No favorite food selected!'),
+      );
+    } else {
+      return ListView.builder(
+        itemCount: favoriteMeals.length,
+        itemBuilder: (ctx, index) {
+          return MealItem(favoriteMeals[index]);
+        },
+      );
+    }
   }
 }
